@@ -21,8 +21,10 @@ function load() {
 	const min_speed = 0.1;
 	var seekOffset = 5.0;
 	var speedOffset = 0.1;
-	chrome.storage.local.get(['seek_offset'], (res) => seekOffset = parseFloat(res.seek_offset) ?? 5.0);
-	chrome.storage.local.get(['speed_offset'], (res) => speedOffset = parseFloat(res.speed_offset) ?? 0.1);
+	chrome.storage.local.get(['seek_offset'], (res) => seekOffset = res.seek_offset == undefined ? 
+		5.0 : parseFloat(res.seek_offset));
+	chrome.storage.local.get(['speed_offset'], (res) => speedOffset = res.speed_offset == undefined ? 
+		0.1 : parseFloat(res.speed_offset));
 	
 	var darkMode = false;
 	var TRANSITION_DURATION = "1s";
