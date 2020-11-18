@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "BigBlueButton buttons",
-  "version": "1.0",
+  "version": "1.2",
   "description": "Adds media-playback controls to BigBlueButton recordings.",
 
   "content_scripts": [
@@ -14,16 +14,17 @@
     "default_popup": "popup/popup.html",
     "default_title": "Options"
   },
-  "permissions": ["storage"],
   // Comment out [browser_specific_settings] for chrome and uncomment for Firefox
   // "browser_specific_settings": {
   //   "gecko": {
   //     "id": "skotevski10@gmail.com"
   //   }
   // },
+  "permissions": ["storage"],
   "icons": { 
     "16": "assets/icon_16.png",
     "48": "assets/icon_48.png",
+    "96": "assets/icon_96.png",
     "128": "assets/icon_128.png" 
   }
 }
