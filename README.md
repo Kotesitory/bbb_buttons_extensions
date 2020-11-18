@@ -18,6 +18,7 @@ Honorable mention: [@becutandavid](https://github.com/becutandavid) who made the
 You can find the extension for Chrome [here]().
 The add-on for Firefox can be snatched from [here]().
 Add it to your browser of choice and use it right away.
+**Make sure the extension is pinned to your browser toolbar for the full experience.**
 
 For users of other browser I am sorry, but I am a one man team. However the original [BBB buttons](https://github.com/Kotesitory/bbb_buttons) project is here and most browsers support modern JS so check it out.
 
@@ -41,6 +42,12 @@ permissions": ["storage"],
  "icons": { 
 ...
 ```
+
+### Adjusting
+
+Adjustments can be made in the extension popup, by clicking on the extension icon on the browser toolbar.
+
+![image](assets/readme_imgs/popup_ss.jpg)
 
 ### Light Theme
 
