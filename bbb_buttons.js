@@ -19,12 +19,19 @@ function load() {
 
 	const max_speed = 5.0;
 	const min_speed = 0.1;
+	const default_seekOffset = 5.0;
+	const default_speedOffset = 0.1;
 	var seekOffset = 5.0;
 	var speedOffset = 0.1;
-	chrome.storage.local.get(['seek_offset'], (res) => seekOffset = res.seek_offset == undefined ? 
-		5.0 : parseFloat(res.seek_offset));
-	chrome.storage.local.get(['speed_offset'], (res) => speedOffset = res.speed_offset == undefined ? 
-		0.1 : parseFloat(res.speed_offset));
+
+	// DEV NOTE: Use [chrome] for Google chrome, use [browser] for other browsers that support storage API
+	chrome.storage.sync.get({speed_offset: default_speedOffset, seek_offset: default_seekOffset},
+		(res) => {
+			console.log(JSON.stringify(res));
+			speedOffset = parseFloat(res.speed_offset);
+			seekOffset = parseFloat(res.seek_offset);
+		}
+	);
 	
 	var darkMode = false;
 	var TRANSITION_DURATION = "1s";
@@ -204,6 +211,7 @@ function load() {
 	    }
 	}
 
+	// DEV NOTE: Use [chrome] for Google chrome, use [browser] for other browsers that support storage API
 	chrome.runtime.onMessage.addListener((msg, sender, response) => {
 		if(msg.target == 'speed_offset'){
 			speedOffset = parseFloat(msg.value);
