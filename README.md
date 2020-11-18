@@ -11,12 +11,12 @@ experience to your liking.
 Future features might be coming. Who knows when, who knows if. 
 
 Feel free to PR if I see it, I will definitely consider it.
-Honorable mention: [@becutandavid](https://github.com/becutandavid) who made the original Pull Request for a Firefox add-on. Checkout his version [here](https://github.com/becutandavid/bbb_buttons).
+Honorable mention: [@becutandavid](https://github.com/becutandavid) who made the original Pull Request for a Firefox add-on. Checkout his version [here](https://github.com/becutandavid/bbb_buttons/tree/firefox_addon).
 
 # Usage
 
 You can find the extension for Chrome [here]().
-The add-on for Firefox can be snatched from [here]().
+The add-on for Firefox can be snatched from [here](https://addons.mozilla.org/en-US/firefox/addon/bigbluebutton-buttons/).
 Add it to your browser of choice and use it right away.
 **Make sure the extension is pinned to your browser toolbar for the full experience.**
 
