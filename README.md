@@ -15,7 +15,7 @@ Honorable mention: [@becutandavid](https://github.com/becutandavid) who made the
 
 # Usage
 
-You can find the extension for Chrome [here]().
+You can find the extension for Chrome [here](https://chrome.google.com/webstore/detail/bigbluebutton-buttons/dhchhdbeibepkacjikkolhimlemkkjam?hl=en-GB&authuser=1).
 The add-on for Firefox can be snatched from [here](https://addons.mozilla.org/en-US/firefox/addon/bigbluebutton-buttons/).
 Add it to your browser of choice and use it right away.
 **Make sure the extension is pinned to your browser toolbar for the full experience.**
