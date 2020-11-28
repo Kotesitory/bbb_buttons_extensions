@@ -58,3 +58,13 @@ Now available in light and dark mode (thanks to [@stefan-krstikj](https://github
 ### Dark Theme
 
 ![image](assets/readme_imgs/control_dark.png)
+
+# Thanks to:
+
+| Contributors	    	|
+| ----------------- 	|
+| [@stefan-krstikj](https://github.com/stefan-krstikj)	|
+| [@becutandavid](https://github.com/becutandavid)		|
+| [@jovanvelkovski](https://github.com/jovanvelkovski)	|
+| [@makikaka](https://github.com/makikaka)				|
+| [@oppip](https://github.com/oppip)					|

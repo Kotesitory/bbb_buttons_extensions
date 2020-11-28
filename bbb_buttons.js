@@ -49,8 +49,6 @@ function load() {
 	label.textContent = "Video speed:" + playbackSpeed.toFixed(2);
 
 	function forward(){
-		console.log(seekOffset);
-		console.log(audio.currentTime);
 		audio.currentTime += seekOffset;
 	  	if(video != undefined && video != null)
 	   		video.currentTime += seekOffset;
@@ -144,6 +142,10 @@ function load() {
 		btnToggleDarkMode.style.transitionDuration = TRANSITION_DURATION
 	}
 
+	function fullScreen() {
+		presentationArea.requestFullscreen();
+	}
+
 	function createButton(color, symbol, func, append=false){
 		let btn = document.createElement('button');
 		btn.type = "button";
@@ -167,22 +169,28 @@ function load() {
 	createButton('green', '↑', speedUp, true);
 	createButton('red', '↓', slowDown, true);
 	createButton('light blue', 'Reset', resetSpeed, true);
-	var btnToggleDarkMode = createButton(DARK_BACKGROUND, "Dark", toggleDarkMode, true)
+	var btnToggleDarkMode = createButton(DARK_BACKGROUND, "Dark", toggleDarkMode, true);
 	chat_area = document.getElementById('chat-area');
 	chat_area.insertBefore(btn_div, chat_area.firstChild);
 	document.onkeydown = checkKey;
 
-	var navBar = document.getElementById("navbar")
-	var recordingTitle = document.getElementById("recording-title")
-	var sidebarIcon = document.getElementsByClassName("sidebar-icon").item(0)
-	var emptyVideoArea = document.getElementById("video")
+	var navBar = document.getElementById("navbar");
+	var recordingTitle = document.getElementById("recording-title");
+	var sidebarIcon = document.getElementsByClassName("sidebar-icon").item(0);
+	var emptyVideoArea = document.getElementById("video");
 	emptyVideoArea.style.height = "1px";
-	var chat = document.getElementById("chat")
+	var chat = document.getElementById("chat");
 	chat.style.border = "0px";
-	var chatAreaSecond = document.getElementsByClassName("inner-wrap").item(0)
-	var playBack = document.getElementById("main-section")
+	var chatAreaSecond = document.getElementsByClassName("inner-wrap").item(0);
+	var playBack = document.getElementById("main-section");
 
-	setTransitions()
+	setTransitions();
+
+	var presentationArea = document.getElementById("presentation-area");
+	var oldFullscreenButton = document.getElementsByClassName("acorn-fullscreen-button")[0];
+	var fullscreenButton = oldFullscreenButton.cloneNode(true);
+	oldFullscreenButton.parentNode.replaceChild(fullscreenButton, oldFullscreenButton);
+	fullscreenButton.addEventListener("click", fullScreen);
 
 	function checkKey(e) {
 
@@ -205,12 +213,52 @@ function load() {
 	       	forward();
 	    }else if (e.keyCode == '32'){
 	    	//space bar
+			if(document.activeElement != document.body)
+				document.activeElement.blur();
+
 	    	if(audio.paused)
 	    		audio.play();
 	    	else
 	    		audio.pause();
 	    }
 	}
+
+	var video_length = document
+		.getElementsByClassName("ui-slider-handle ui-state-default ui-corner-all")[0]
+		.getAttribute('aria-valuemax');
+	document.getElementsByClassName("acorn-timer")[0].remove();
+	var setTimeAfter = document.getElementsByClassName("acorn-play-button")[0];
+	setTimeAfter.insertAdjacentHTML('afterend', "<span class='acorn-timer' id='currTime'></span>");
+	setTimeAfter = document.getElementById('currTime');
+	setTimeAfter.style.width = "max-content";
+	var changehere = document
+		.getElementsByClassName("acorn-seek-slider ui-slider ui-widget ui-widget-content ui-corner-all ui-slider-horizontal")[0];
+	changehere.insertAdjacentHTML('afterend', "<span class='acorn-timer' id='timeleft'></span>");
+	changehere = document.getElementById('timeleft');
+	changehere.style.width = "max-content";
+
+	function parseTime(secs) {
+		var hours   = Math.floor(secs / 3600);
+		var minutes = Math.floor((secs - (hours * 3600)) / 60);
+		var seconds = Math.floor(secs - (hours * 3600) - (minutes * 60));
+
+		var time = "";
+		if (hours > 0)   {time += hours+":";}
+		if (minutes < 10) {minutes = "0" + minutes;}
+		if (seconds < 10) {seconds = "0" + seconds;}
+		time += minutes + ':' + seconds;
+
+		return time;
+	}
+
+	function settime() {
+		setTimeAfter.textContent = parseTime(audio.currentTime);
+		timeleft = video_length - audio.currentTime;
+		timeleft = parseTime(timeleft + 1);
+		changehere.textContent = "-" + timeleft;
+	}
+
+	setInterval(settime, 10);
 
 	// DEV NOTE: Use [chrome] for Google chrome, use [browser] for other browsers that support storage API
 	chrome.runtime.onMessage.addListener((msg, sender, response) => {
